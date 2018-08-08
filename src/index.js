@@ -18,3 +18,5 @@ const getPredictArr = (templateArr, steps) => {
 
   return finalArr
 }
+
+module.exports = getPredictArr
