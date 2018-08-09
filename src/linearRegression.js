@@ -12,8 +12,13 @@ const linearRegression = (arr) => {
   }
 
   if (arr.length === 1) {
+    let a = 1
+    const n = String(arr[0]).split('.')[1] && String(arr[0]).split('.')[1].length
+    if (n) {
+      a = 1 / 10**n
+    }
     return {
-      a: 1,
+      a,
       b: arr[0]
     }
   }
