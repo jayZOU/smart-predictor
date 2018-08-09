@@ -3,11 +3,11 @@ const separator = (arr) => {
   const regx = /\d{1,}/g
 
   for (let i = 0, len = arr.length; i < len; i++) {
-    const matchedNums = arr[i].match(regx)
+    const matchedNums = String(arr[i]).match(regx)
 
     if (!isNaN(arr[i])) {
       typesArr.push({
-        originValue: arr[i],
+        realValue: arr[i],
         numericValue: Number(arr[i]),
         splitParts: 'Number',
         index: i
@@ -16,7 +16,7 @@ const separator = (arr) => {
 
     else if (!matchedNums) {
       typesArr.push({
-        originValue: arr[i],
+        realValue: arr[i],
         numericValue: null,
         splitParts: 'String',
         index: i
@@ -27,7 +27,7 @@ const separator = (arr) => {
       const numericValue = matchedNums[matchedNums.length - 1]
       const splitParts = arr[i].split(numericValue)
       typesArr.push({
-        originValue: arr[i],
+        realValue: arr[i],
         numericValue,
         splitParts,
         index: i

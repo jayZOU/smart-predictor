@@ -16,16 +16,15 @@ const classifier = (separatedArr) => {
   })
 
   Object.keys(types).forEach((key) => {
-    for (let i = 0; i < types[key].length; i++) {
-      if (i - 1 === 1) {
-        if (types[key][i].index - types[key][i - 1].index !== 1) {
-          const newType = types[key][i]
-          types[key].splice(i, 1)
-          if (!types[key + i]) {
-            types[key + i] = []
-          }
-          types[key + i].push(newType)
+    const currentType = types[key]
+    for (let i = 1, len = currentType.length; i < len; i++) {
+      if (currentType[i].index - currentType[i - 1].index !== 1) {
+        const newType = currentType[i]
+        currentType.splice(i, 1)
+        if (!types[key + i]) {
+          types[key + i] = []
         }
+        types[key + i].push(newType)
       }
     }
   })

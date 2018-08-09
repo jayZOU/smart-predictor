@@ -18,11 +18,15 @@ const predictor = (rawArr, predictSteps) => {
 
       for (let i = originLen; i < totalLen; i++) {
         const newValue = a * i + b
+        let realValue
+        if (typeArr[0].splitParts instanceof Array) {
+          realValue = typeArr[0].splitParts[0] + newValue + typeArr[0].splitParts[1]
+        } else {
+          realValue = typeof typeArr[j].realValue === 'string' ? `${newValue}` : newValue
+        }
 
         typeArr.push({
-          originValue: typeArr[0].splitParts instanceof Array
-            ? typeArr[0].splitParts[0] + newValue + typeArr[0].splitParts[1]
-            : newValue,
+          realValue,
           numericValue: newValue,
           splitParts: typeArr[0].splitParts,
           index: typeArr[j].index + times * rawArr.length
@@ -45,7 +49,7 @@ const predictor = (rawArr, predictSteps) => {
 
       for (let i = originLen; i < totalLen; i++) {
         typeArr.push({
-          originValue: typeArr[j].originValue,
+          realValue: typeArr[j].realValue,
           numericValue: null,
           splitParts: typeArr[0].splitParts,
           index: typeArr[j].index + times * rawArr.length
@@ -64,4 +68,23 @@ const predictor = (rawArr, predictSteps) => {
   return classifiedArr
 }
 
-module.exports = predictor
+const getPredictArr = (templateArr, steps) => {
+  const predictedArr = predictor(templateArr, steps)
+
+  let tempArr = []
+  Object.keys(predictedArr).forEach((key) => {
+    tempArr = tempArr.concat(predictedArr[key])
+  })
+
+  const len = tempArr.length
+  const finalArr = new Array(len)
+  for (let i = 0; i < len; i++) {
+    const val = tempArr[i].realValue
+    const index = tempArr[i].index
+    finalArr[index] = val
+  }
+
+  return finalArr
+}
+
+module.exports = getPredictArr
