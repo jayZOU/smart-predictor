@@ -2,16 +2,27 @@ import linearRegression from './linearRegression'
 import separator from './separator'
 import classifier from './classifier'
 
-const predictor = (rawArr, predictSteps) => {
-  const classifiedArr = classifier(separator(rawArr))
+/**
+ * Predictor is the core of smart-predictor.
+ * It takes groups from classifier,
+ * then uses `linear regression` to predict new values of one group,
+ * and combines all the groups into a new array as result.
+ *
+ * @param {{Array}} rawArr a simple array like [1, 2, 3]
+ * @param {{Number}} predictTime a number of predict time
+ * @return {{Array}}
+ */
 
-  Object.keys(classifiedArr).forEach((key) => {
+const predictor = (rawArr, predictTime) => {
+  const groups = classifier(separator(rawArr))
+
+  Object.keys(groups).forEach((key) => {
     if (key !== 'String') {
-      const typeArr = classifiedArr[key]
+      const typeArr = groups[key]
       const pureNumArr = typeArr.map(({ numericValue }) => Number(numericValue))
       const { a, b } = linearRegression(pureNumArr)
       const originLen = typeArr.length
-      const totalLen = originLen + predictSteps * typeArr.length
+      const totalLen = originLen + predictTime * typeArr.length
 
       let j = 0
       let times = 1
@@ -40,9 +51,9 @@ const predictor = (rawArr, predictSteps) => {
         }
       }
     } else {
-      const typeArr = classifiedArr[key]
+      const typeArr = groups[key]
       const originLen = typeArr.length
-      const totalLen = originLen + predictSteps * typeArr.length
+      const totalLen = originLen + predictTime * typeArr.length
 
       let j = 0
       let times = 1
@@ -65,11 +76,20 @@ const predictor = (rawArr, predictSteps) => {
     }
   })
 
-  return classifiedArr
+  return groups
 }
 
-const getPredictArr = (templateArr, steps) => {
-  const predictedArr = predictor(templateArr, steps)
+/**
+ * This method takes items from groups,
+ * set the items to the correct position by its `index` property,
+ * then return the predicted array.
+ * @param {Array} rawArr a simple array like [1, 2, 3]
+ * @param {Number} predictTime a number of predict time
+ * @return {Array}
+ */
+
+const getPredictedArr = (rawArr, predictTime) => {
+  const predictedArr = predictor(rawArr, predictTime)
 
   let tempArr = []
   Object.keys(predictedArr).forEach((key) => {
@@ -87,4 +107,4 @@ const getPredictArr = (templateArr, steps) => {
   return finalArr
 }
 
-export default getPredictArr
+export default getPredictedArr

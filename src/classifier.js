@@ -1,6 +1,16 @@
+/**
+ * Classifier receives an array from separator,
+ * then classifies its items into different groups.
+ * It uses `item.splitParts` as items' type,
+ * only continuous and same type item would be put into one group.
+ * @param {Array} separatedArr
+ * @return {Object}
+ */
+
 const classifier = (separatedArr) => {
   const types = Object.create(null)
 
+  // classify items into different groups
   separatedArr.forEach((item) => {
     if (item.splitParts instanceof Array) {
       if (!types[item.splitParts.join('')]) {
@@ -15,6 +25,8 @@ const classifier = (separatedArr) => {
     }
   })
 
+  // If an item in a group were not continuous from the others,
+  // put it into a new group
   Object.keys(types).forEach((key) => {
     const currentType = types[key]
     for (let i = 1, len = currentType.length; i < len; i++) {

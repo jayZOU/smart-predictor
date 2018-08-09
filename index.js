@@ -1,3 +1,3 @@
-import getPredictArr from './src/predictor'
+import getPredictedArr from './src/predictor'
 
-export default getPredictArr
+export default getPredictedArr
