@@ -1,6 +1,6 @@
 /**
  * Separator receives an array like [1, 'a', 2],
- * and then converts every of its item into information object
+ * and then converts every of its item into informationed object
  * eg. [{
  *  "index": 0,
     "numericValue": 1,
