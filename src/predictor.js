@@ -8,9 +8,9 @@ import classifier from './classifier'
  * then uses `linear regression` to predict new values of one group,
  * and combines all the groups into a new array as result.
  *
- * @param {{Array}} rawArr a simple array like [1, 2, 3]
- * @param {{Number}} predictTime a number of predict time
- * @return {{Array}}
+ * @param {Array} rawArr a simple array like [1, 2, 3]
+ * @param {Number} predictTime a number of predict time
+ * @return {Array}
  */
 
 const predictor = (rawArr, predictTime) => {
