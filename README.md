@@ -15,7 +15,7 @@ What's more, the most interesting things is that only the continuous data would 
 By understanding these conceptions, we could talk about how does it works.
 
 ## Separator
-We use `[1, 2, 'a1c', 'a2c']` as an example. Once we got an array like this, the first thing we need to do is to analyze its items, wheather an item is a string, a number, or anything else. Informates them and separates them into a new array.
+We use `[1, 2, 'a1c', 'a2c']` as an example. Once we got an array like this, the first thing we need to do is to analyze its items, wheather an item is a string, a number, or anything else. Then wo could informates them and separates them into a new array.
 
 For example, item `1` could be informated as ↓
 ```javascript
@@ -27,10 +27,10 @@ For example, item `1` could be informated as ↓
 }
 ```
 
-and item `a1` would be like this ↓
+and item `a1c` would be like this ↓
 ```javascript
 {
-  realValue: 'a1',
+  realValue: 'a1c',
   numericValue: 1,
   splitParts: ['a', 'c'],
   index: 2
