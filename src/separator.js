@@ -12,18 +12,14 @@ const separator = (arr) => {
         splitParts: 'Number',
         index: i
       })
-    }
-
-    else if (!matchedNums) {
+    } else if (!matchedNums) {
       typesArr.push({
         realValue: arr[i],
         numericValue: null,
         splitParts: 'String',
         index: i
       })
-    }
-
-    else if (matchedNums) {
+    } else if (matchedNums) {
       const numericValue = matchedNums[matchedNums.length - 1]
       const splitParts = arr[i].split(numericValue)
       typesArr.push({
@@ -38,4 +34,4 @@ const separator = (arr) => {
   return typesArr
 }
 
-module.exports = separator
+export default separator

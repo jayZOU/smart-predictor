@@ -1,6 +1,6 @@
-const linearRegression = require('./linearRegression')
-const separator = require('./separator')
-const classifier = require('./classifier')
+import linearRegression from './linearRegression'
+import separator from './separator'
+import classifier from './classifier'
 
 const predictor = (rawArr, predictSteps) => {
   const classifiedArr = classifier(separator(rawArr))
@@ -20,7 +20,7 @@ const predictor = (rawArr, predictSteps) => {
         const newValue = a * i + b
         let realValue
         if (typeArr[0].splitParts instanceof Array) {
-          realValue = typeArr[0].splitParts[0] + newValue + typeArr[0].splitParts[1]
+          realValue = typeArr[0].splitParts.join(newValue)
         } else {
           realValue = typeof typeArr[j].realValue === 'string' ? `${newValue}` : newValue
         }
@@ -87,4 +87,4 @@ const getPredictArr = (templateArr, steps) => {
   return finalArr
 }
 
-module.exports = getPredictArr
+export default getPredictArr

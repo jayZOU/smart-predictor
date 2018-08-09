@@ -32,4 +32,4 @@ const classifier = (separatedArr) => {
   return types
 }
 
-module.exports = classifier
+export default classifier

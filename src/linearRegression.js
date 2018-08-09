@@ -1,7 +1,7 @@
 /**
- * 
- * @param {Array}} arr 
- * 
+ *
+ * @param {Array}} arr
+ *
  * y = ax + b
  * a = ∑(x−x')(y−y') / ∑(x−x')(x−x')
  */
@@ -15,7 +15,7 @@ const linearRegression = (arr) => {
     let a = 1
     const n = String(arr[0]).split('.')[1] && String(arr[0]).split('.')[1].length
     if (n) {
-      a = 1 / 10**n
+      a = 1 / 10 ** n
     }
     return {
       a,
@@ -41,7 +41,7 @@ const linearRegression = (arr) => {
     let x = i
     let y = arr[i]
     num += (x - xmean) * (y - ymean)
-    den += (x-xmean)**2
+    den += (x - xmean) ** 2
   }
 
   const a = num / den
@@ -50,4 +50,4 @@ const linearRegression = (arr) => {
   return { a, b }
 }
 
-module.exports = linearRegression
+export default linearRegression
